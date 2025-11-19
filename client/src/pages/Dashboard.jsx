@@ -1,13 +1,14 @@
 import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { AlertTriangle, CheckCircle2, Clock3, FileStack, Layers, ShieldAlert } from 'lucide-react';
+import { AlertTriangle, CheckCircle2, Clock3, FileStack, Layers, ShieldAlert, Zap } from 'lucide-react';
 import { useAnalysis } from '../context/AnalysisContext';
 import SectionHeader from '../components/common/SectionHeader';
 import AIInsightsPanel from '../components/insights/AIInsightsPanel';
 import TaskBoard from '../components/tasks/TaskBoard';
 import ActivityHeatmap from '../components/heatmap/ActivityHeatmap';
 import VoiceCommandIndicator from '../components/voice/VoiceCommandIndicator';
+import GravityZone from '../components/gravity/GravityZone';
 import { useVoiceFeedback } from '../hooks/useVoiceFeedback';
 import { useVoiceCommands } from '../hooks/useVoiceCommands';
 import { formatPercentage } from '../utils/formatters';
@@ -22,6 +23,7 @@ const fallbackHeatmap = Array.from({ length: 14 }).map((_, index) => ({
 const Dashboard = () => {
   const { analysis, setAnalysis, setLastVoiceText } = useAnalysis();
   const [tasks, setTasks] = useState(analysis?.recommendedTasks || []);
+  const [isGravityEnabled, setIsGravityEnabled] = useState(false);
 
   useEffect(() => {
     if (analysis?.recommendedTasks) {
@@ -115,10 +117,10 @@ const Dashboard = () => {
   const heatmapData = analysis?.activityHeatmap?.length ? analysis.activityHeatmap : fallbackHeatmap;
 
   return (
-    <div className="flex flex-col gap-10">
+    <GravityZone enabled={isGravityEnabled} className="flex flex-col gap-10 min-h-screen">
       <section className="card-surface overflow-hidden p-8">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-          <div>
+          <div data-physics="true">
             <p className="text-xs uppercase tracking-[0.4em] text-text-muted">Krimson Overview</p>
             <h1 className="text-3xl font-semibold text-white md:text-4xl">Project Intelligence Dashboard</h1>
             <p className="text-text-muted">
@@ -134,6 +136,14 @@ const Dashboard = () => {
             </Link>
             <button
               type="button"
+              onClick={() => setIsGravityEnabled(!isGravityEnabled)}
+              className={`rounded-full border px-5 py-2 text-xs font-semibold uppercase tracking-[0.3em] transition-colors ${isGravityEnabled ? 'border-primary bg-primary text-white' : 'border-white/10 text-text-muted hover:text-white'
+                }`}
+            >
+              {isGravityEnabled ? 'Gravity On' : 'Gravity Off'}
+            </button>
+            <button
+              type="button"
               onClick={handleVoiceToggle}
               className="rounded-full border border-white/10 px-5 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-text-muted hover:text-white"
             >
@@ -144,7 +154,7 @@ const Dashboard = () => {
 
         <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {metrics.map(({ label, value, detail, icon: Icon }) => (
-            <div key={label} className="rounded-2xl border border-white/5 bg-white/5 p-4">
+            <div key={label} data-physics="true" className="rounded-2xl border border-white/5 bg-white/5 p-4">
               <div className="flex items-center justify-between">
                 <p className="text-xs uppercase tracking-[0.3em] text-text-muted">{label}</p>
                 <Icon className="h-4 w-4 text-white" />
@@ -157,7 +167,7 @@ const Dashboard = () => {
       </section>
 
       {!analysis && (
-        <section className="card-surface flex flex-col gap-4 p-8 text-center text-text-muted">
+        <section className="card-surface flex flex-col gap-4 p-8 text-center text-text-muted" data-physics="true">
           <p className="text-xs uppercase tracking-[0.4em]">Awaiting upload</p>
           <h2 className="text-2xl font-semibold text-white">No analysis yet</h2>
           <p>Upload a repo on the Upload page to activate full AI analytics.</p>
@@ -169,14 +179,16 @@ const Dashboard = () => {
 
       {analysis && (
         <>
-          <AIInsightsPanel analysis={analysis} onVoiceToggle={handleVoiceToggle} isSpeaking={isSpeaking} />
+          <div data-physics="true">
+            <AIInsightsPanel analysis={analysis} onVoiceToggle={handleVoiceToggle} isSpeaking={isSpeaking} />
+          </div>
 
           <section className="grid gap-8 lg:grid-cols-3">
-            <div className="space-y-6 lg:col-span-2">
+            <div className="space-y-6 lg:col-span-2" data-physics="true">
               <TaskBoard tasks={tasks} onTasksChange={handleTasksChange} />
             </div>
             <div className="space-y-6">
-              <div className="card-surface space-y-4 p-6">
+              <div className="card-surface space-y-4 p-6" data-physics="true">
                 <SectionHeader title="Timeline signal" subtitle="Estimated delivery horizon" />
                 <div className="rounded-2xl border border-white/5 bg-white/5 p-4">
                   <div className="flex items-center gap-3 text-white">
@@ -207,10 +219,12 @@ const Dashboard = () => {
             </div>
           </section>
 
-          <ActivityHeatmap data={heatmapData} />
+          <div data-physics="true">
+            <ActivityHeatmap data={heatmapData} />
+          </div>
         </>
       )}
-    </div>
+    </GravityZone>
   );
 };
 

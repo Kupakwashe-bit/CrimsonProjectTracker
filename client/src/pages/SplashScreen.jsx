@@ -38,15 +38,29 @@ const SplashScreen = () => (
             </Link>
           </div>
         </div>
-        <div className="rounded-3xl border border-white/5 bg-white/5 p-8">
-          <p className="text-xs uppercase tracking-[0.4em] text-text-muted">Live intelligence panel</p>
-          <div className="mt-6 space-y-6">
-            {features.map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/5 bg-background/60 p-5">
-                <p className="text-lg font-semibold text-white">{item.title}</p>
-                <p className="text-sm text-text-muted">{item.detail}</p>
-              </div>
-            ))}
+        <div className="flex flex-col items-center gap-6">
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="w-64 h-64 flex items-center justify-center"
+          >
+            <img
+              src="/logo.jpg"
+              alt="Krimson Logo"
+              className="w-full h-full object-contain rounded-3xl"
+            />
+          </motion.div>
+          <div className="rounded-3xl border border-white/5 bg-white/5 p-8 w-full">
+            <p className="text-xs uppercase tracking-[0.4em] text-text-muted">Live intelligence panel</p>
+            <div className="mt-6 space-y-6">
+              {features.map((item) => (
+                <div key={item.title} className="rounded-2xl border border-white/5 bg-background/60 p-5">
+                  <p className="text-lg font-semibold text-white">{item.title}</p>
+                  <p className="text-sm text-text-muted">{item.detail}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

@@ -21,8 +21,12 @@ const AppShell = ({ children }) => {
       <header className="sticky top-0 z-40 backdrop-blur-2xl bg-background/70 border-b border-white/5">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <NavLink to="/" className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-2xl bg-primary flex items-center justify-center text-lg font-bold text-white shadow-crimson">
-              K
+            <div className="h-10 w-10 rounded-2xl overflow-hidden flex items-center justify-center shadow-crimson">
+              <img
+                src="/logo.jpg"
+                alt="Krimson Logo"
+                className="w-full h-full object-cover"
+              />
             </div>
             <div>
               <p className="text-sm uppercase tracking-[0.3em] text-text-muted">Krimson</p>
@@ -36,8 +40,7 @@ const AppShell = ({ children }) => {
                 key={label}
                 to={to}
                 className={({ isActive }) =>
-                  `rounded-full px-4 py-2 text-sm transition ${
-                    isActive ? 'bg-primary text-white shadow-crimson-soft' : 'text-text-muted hover:text-text-primary'
+                  `rounded-full px-4 py-2 text-sm transition ${isActive ? 'bg-primary text-white shadow-crimson-soft' : 'text-text-muted hover:text-text-primary'
                   }`
                 }
               >

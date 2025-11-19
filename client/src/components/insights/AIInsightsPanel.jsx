@@ -46,17 +46,17 @@ const AIInsightsPanel = ({ analysis, onVoiceToggle, isSpeaking }) => {
           <VoiceFeedbackButton isPlaying={isSpeaking} onClick={onVoiceToggle} label="Play voice feedback" />
         </div>
 
-        <div className="flex flex-col items-center gap-6 rounded-2xl border border-white/5 bg-white/5 p-6 lg:w-80">
+        <div className="flex flex-col items-center gap-8 rounded-2xl border border-white/5 bg-white/5 p-8 lg:w-96">
           <CompletionGauge value={analysis?.completion} />
-          <div className="w-full space-y-4">
+          <div className="w-full space-y-6">
             {progressEntries.map(([discipline, value]) => (
               <div key={discipline}>
-                <div className="flex justify-between text-xs uppercase tracking-[0.3em] text-text-muted">
+                <div className="flex justify-between text-sm uppercase tracking-[0.25em] text-text-muted mb-2">
                   <span>{discipline}</span>
-                  <span>{Math.round(value)}%</span>
+                  <span className="font-semibold">{Math.round(value)}%</span>
                 </div>
-                <div className="mt-1.5 h-1.5 rounded-full bg-white/10">
-                  <div className="h-full rounded-full bg-gradient-to-r from-accent to-primary" style={{ width: `${value}%` }} />
+                <div className="h-2 rounded-full bg-white/10">
+                  <div className="h-full rounded-full bg-gradient-to-r from-accent to-primary transition-all duration-500" style={{ width: `${value}%` }} />
                 </div>
               </div>
             ))}

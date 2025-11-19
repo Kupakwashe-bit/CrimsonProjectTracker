@@ -7,17 +7,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#5B0E15',
-        'primary-dark': '#2B0307',
-        background: '#050203',
-        surface: '#130506',
-        accent: '#F5E6DE',
-        'accent-soft': '#F5E6DE0D',
-        'text-primary': '#F7F2EE',
-        'text-muted': '#B8A7A5',
-        success: '#5DD39E',
-        warning: '#F0A500',
-        danger: '#FF5C5C',
+        primary: '#00E0C6', // Cyan/Teal
+        'primary-dark': '#00B29D',
+        background: '#020617', // Dark Void
+        surface: '#0F172A', // Dark Navy
+        accent: '#22D3EE', // Bright Cyan
+        'accent-soft': '#22D3EE1A',
+        'text-primary': '#F1F5F9', // Slate 100
+        'text-muted': '#94A3B8', // Slate 400
+        success: '#4ADE80',
+        warning: '#FBBF24',
+        danger: '#F87171',
       },
       fontFamily: {
         sans: ['Space Grotesk', 'Inter', 'sans-serif'],
