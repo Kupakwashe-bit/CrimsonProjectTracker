@@ -183,7 +183,7 @@ const Dashboard = () => {
             <AIInsightsPanel analysis={analysis} onVoiceToggle={handleVoiceToggle} isSpeaking={isSpeaking} />
           </div>
 
-          <section className="grid gap-8 lg:grid-cols-3">
+          <section className="grid gap-10 lg:grid-cols-3">
             <div className="space-y-6 lg:col-span-2" data-physics="true">
               <TaskBoard tasks={tasks} onTasksChange={handleTasksChange} />
             </div>

@@ -10,12 +10,12 @@ const statusMeta = {
 };
 
 const TaskColumn = ({ title, tasks, onStatusChange }) => (
-  <div className="flex flex-1 flex-col gap-4 rounded-2xl border border-white/5 bg-white/5 p-4">
+  <div className="flex flex-1 flex-col gap-6 rounded-2xl border border-white/5 bg-white/5 p-6">
     <div>
       <p className="text-xs uppercase tracking-[0.3em] text-text-muted">{title}</p>
       <p className="text-sm text-text-muted">{tasks.length} tasks</p>
     </div>
-    <div className="space-y-3">
+    <div className="space-y-4">
       {tasks.map((task) => (
         <div key={task.id} className="rounded-2xl border border-white/10 bg-background/60 p-4 text-sm text-text-primary">
           <p className="font-medium text-white">{task.title}</p>
@@ -109,7 +109,7 @@ const TaskBoard = ({ tasks = [], onTasksChange }) => {
         </button>
       </div>
 
-      <div className="flex flex-col gap-4 lg:flex-row">
+      <div className="flex flex-col gap-6 lg:flex-row">
         <TaskColumn title="Todo" tasks={grouped.todo} onStatusChange={updateTaskStatus} />
         <TaskColumn title="In Progress" tasks={grouped['in-progress']} onStatusChange={updateTaskStatus} />
         <TaskColumn title="Blocked" tasks={grouped.blocked} onStatusChange={updateTaskStatus} />
